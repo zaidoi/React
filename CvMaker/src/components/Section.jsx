@@ -16,7 +16,7 @@ function Section({ data, exData, edData }) {
         </h3>
         <p>
           <b>Company Name: </b>
-          {exData.company || "Masjid Ansar"}
+          {exData.company || "Google"}
         </p>
         <p>
           <b>Job Title: </b>

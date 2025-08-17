@@ -25,8 +25,10 @@ function App() {
   });
 
   return (
-    <>
-      <div className="main w-100 h-100 flex gap-20">
+    
+       <div className="app-container">
+         <h1 className='text-2xl m-2'>Zaid's CV Maker</h1>
+    <div className="main flex gap-20">
         <div className="section-main">
           <General formData={formData} setFormData={setFormData} />
           <Education setEducationData={setEducationData} />
@@ -41,7 +43,8 @@ function App() {
           />
         </div>
       </div>
-    </>
+       </div>
+    
   );
 }
 

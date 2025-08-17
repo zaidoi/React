@@ -8,7 +8,7 @@ function General({ formData, setFormData }) {
   };
 
   return (
-    <div className="flex flex-col  bg-gray-200  box-border w-110 h-100 rounded-lg p-4 gap-2  ">
+    <div className="flex flex-col  bg-gray-200  box-border w-110 h-80 rounded-lg p-4 gap-2  ">
       <h1 className="text-2xl text-center mt-2">Personal Details</h1>
       <hr />
 
@@ -17,6 +17,7 @@ function General({ formData, setFormData }) {
         className="bg-gray-400 rounded-lg px-2 outline-none w-100 text-base h-8"
         name="name"
         type="text"
+        placeholder="Your Name here"
         value={formData.name}
         onChange={handleChange}
       />
@@ -42,14 +43,7 @@ function General({ formData, setFormData }) {
         onChange={handleChange}
       />
 
-      <div className="btn  flex flex-row  justify-between mt-4">
-        <button className="bg-black text-white rounded-lg px-3 py-2 transition delay-150 duration-20 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-600">
-          Submit
-        </button>
-        <button className="bg-black text-white rounded-lg px-4 py-2 mr-7 transition delay-20 duration-200 ease-in-out hover:-translate-y-1 hover:scale-110 hover:bg-gray-600 ">
-          Edit
-        </button>
-      </div>
+      
     </div>
   );
 }
