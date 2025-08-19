@@ -25,7 +25,7 @@ function App() {
     <div
       className="w-full h-screen flex flex-wrap justify-center items-center bg-cover bg-no-repeat"
       style={{
-        backgroundImage: `url('https://images.pexels.com/photos/106152/euro-coins-currency-money-106152.jpeg?_gl=1*1e1r458*_ga*MTAzMDIyNTU0OS4xNzM1MjM1OTg0*_ga_8JE65Q40S6*czE3NTU2MDc5MDUkbzIkZzEkdDE3NTU2MDc5NDYkajE5JGwwJGgw')`,
+        backgroundImage: `url('https://images.pexels.com/photos/106152/euro-coins-currency-money-106152.jpeg?_gl=1*1e1r458*_ga*MTAzMDIyNTU0OS4xNzM1MjM1OTg0*_ga_8JE65Q40S6*czE3NTU2MDc5MDUkbzIkZzEkdDE3NTU2MDc5NkajE5JGwwJGgw')`,
       }}
     >
       <div className="w-full">
