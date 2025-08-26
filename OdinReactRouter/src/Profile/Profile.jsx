@@ -10,7 +10,6 @@ const {name} = useParams();
   return (
     <div>
       <h1>Hello from profile page!</h1>
-      <Link to="/">Back Ja</Link>
       <p>So, how are you?</p>
     
       <hr />
