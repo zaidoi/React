@@ -1,59 +1,94 @@
-const { useState, useEffect, useRef } = React;
+const { useState } = React;
 
-export const OTPGenerator = () => {
-  const [generateOtp, setGenerateOtp] = useState("");
-  const [btnEnabled, setBtnEnabled] = useState(true);
-  const [countdown, setCountdown] = useState(0);
+export const SuperheroForm = () => {
 
-  const intervalRef = useRef(null); // ✅ store interval ID here
+  const powerSourceOptions = [
+    'Bitten by a strange creature',
+    'Radioactive exposure',
+    'Science experiment',
+    'Alien heritage',
+    'Ancient artifact discovery',
+    'Other'
+  ];
 
-  const handleClick = () => {
-    const otp = Math.floor(100000 + Math.random() * 900000); // 6-digit OTP
-    setGenerateOtp(otp);
-    setCountdown(5);       // start countdown
-    setBtnEnabled(false);  // disable button
-  };
+  const powersOptions = [
+    'Super Strength',
+    'Super Speed',
+    'Flight',
+    'Invisibility',
+    'Telekinesis',
+    'Other'
+  ];
 
-  useEffect(() => {
-    if (countdown === 0) {
-      setBtnEnabled(true);      // enable button when countdown finishes
-      clearInterval(intervalRef.current); // cleanup interval
-      intervalRef.current = null;
-      return;
-    }
+  const [heroName, setHeroName] = useState('');
+  const [realName, setRealName] = useState('');
+  const [powerSource, setPowerSource] = useState('');
+  const [powers, setPowers] = useState([]);
 
-    // clear any existing interval before starting a new one
-    if (intervalRef.current) clearInterval(intervalRef.current);
-
-    intervalRef.current = setInterval(() => {
-      setCountdown((prev) => prev - 1);
-    }, 1000);
-
-    return () => clearInterval(intervalRef.current); // cleanup on unmount
-  }, [countdown]);
+  const handlePowersChange = e => {
+    const { value, checked } = e.target;
+    setPowers(checked ? [...powers, value] : powers.filter(p => p !== value));
+  }
 
   return (
-    <div className="container">
-      <h1 id="otp-title">OTP Generator</h1>
-      <h2 id="otp-display">
-        {generateOtp ? generateOtp : "Click 'Generate OTP' to get a code"}
-      </h2>
+    <div className='form-wrap'>
+      <h2>Superhero Application Form</h2>
+      <p>Please complete all fields</p>
+       <form method='post' action='https://superhero-application-form.freecodecamp.org'>
+        <div className='section'>
+          <label>
+            Hero Name
+            <input
+              type='text'
+              value={heroName}
+              onChange={e => setHeroName(e.target.value)}
+            />
+          </label>
+          <label>
+            Real Name
+            <input
+              type='password'
+              value={realName}
+              onChange={e => setRealName(e.target.value)}
+            />
+          </label>
+        </div>
+        <label className='section column'>
+          How did you get your powers?
+          <select value={powerSource} onChange={e => setPowerSource(e.target.value)}>
+            <option value=''>
+              Select one
+            </option>
+           {powerSourceOptions.map(source => (
+             <option key={source} value={source}>
+                {source}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label className='section column'>
+          List your powers (select all that apply):
 
-      <p id="otp-timer" aria-live="polite">
-        {countdown > 0
-          ? `Expires in: ${countdown} seconds`
-          : generateOtp
-          ? "OTP expired. Click the button to generate a new OTP."
-          : ""}
-      </p>
-
-      <button
-        id="generate-otp-button"
-        onClick={handleClick}
-        disabled={!btnEnabled} // disable while countdown
-      >
-        Generate OTP
-      </button>
+          {powersOptions.map(power => (
+            <label key={power}>
+              <input
+                type='checkbox'
+                value={power}
+                checked={powers.includes(power)}
+                onChange={handlePowersChange}
+              />
+              <span>{power}</span>
+            </label>
+          ))}
+        </label>
+        <button
+          className='submit-btn'
+          type='submit'
+          disabled={!heroName || !realName || !powerSource || powers.length === 0}
+        >
+          Join the League
+        </button>
+      </form>
     </div>
-  );
+  )
 };
