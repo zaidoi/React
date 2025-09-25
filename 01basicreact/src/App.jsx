@@ -1,26 +1,23 @@
-import { useActionState, useReducer } from "react";
+import { useOptimistic } from "react";
 
-function reducer(state, action) {
-  switch (action.type) {
-    case "increment":
-      return { count: state.count + 1 };
-    case "decrement":
-      return { count: state.count - 1 };
-    default:
-      state;
-  }
-}
-
-function Counter() {
-  const [state, dispatch] = useReducer(reducer, { count: 0 });
-
-  return (
-    <div>
-      <p>Count:{state.count}</p>
-      <button onClick={() => dispatch({ type: "increment" })}>Incre</button>
-      <button onClick={() => dispatch({ type: "decrement" })}>Decre</button>
-    </div>
+function LikeButton({ postId }) {
+  const [optimisticLikes, addOptimisticLike] = useOptimistic(
+    0, // initial likes
+    (state, newLike) => state + newLike // how to update
   );
-}
 
-export default Counter;
+  async function handleLike() {
+    // instantly update UI
+    addOptimisticLike(1);
+
+    // then actually call server
+    try {
+      await fetch(`/api/like/${postId}`, { method: "POST" });
+    } catch {
+      // rollback if server fails
+      addOptimisticLike(-1);
+    }
+  }
+
+  return <button onClick={handleLike}>👍 {optimisticLikes}</button>;
+}
