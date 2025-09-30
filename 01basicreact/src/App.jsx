@@ -14,7 +14,7 @@ export function CurrencyConverter() {
 };
 
 const calculation = useMemo(()=>{
-  setResult('')
+ 
   const first = goodMapping[startCurrency]
   const second = goodMapping[targetCurrency]
 
