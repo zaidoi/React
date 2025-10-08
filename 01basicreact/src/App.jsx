@@ -28,7 +28,7 @@ function Board() {
     return null;
   };
 
-  // Handle click on a square
+  
   const handleClick = (index) => {
     if (squares[index] || winner) return;
 
@@ -46,7 +46,7 @@ function Board() {
     setIsXNext(!isXNext);
   };
 
-  // Reset game
+
   const resetGame = () => {
     setSquares(Array(9).fill(null));
     setIsXNext(true);
